@@ -12,6 +12,7 @@ pin = "1111"
 possiblePass = "" 
 numList = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
+
 def updateLabel():
 	label['text'] = possiblePass
 	reshuffle()
@@ -40,6 +41,13 @@ def backspace():
 
 def reshuffle():
 	random.shuffle(numList)
+	i = 0
+	for button in numberPad:
+		button['text'] = numList[i]
+		button['command'] = lambda m = numList[i]: response(m)
+		i+=1
+	
+	"""
 	upperLeft['text'] = numList[0]
 	upperLeft['command'] = lambda m = numList[0]: response(m)
 	upperMid['text'] = numList[1]
@@ -60,6 +68,7 @@ def reshuffle():
 	lowerRight['command'] = lambda m = numList[8]: response(m)
 	bottomMid['text'] = numList[9]
 	bottomMid['command'] = lambda m = numList[9]: response(m)	
+	"""
 
 label = Label(app, text = possiblePass, width = 13) #not sure how width is decided
 
@@ -77,6 +86,7 @@ lowerMid = Button(app, text = numList[8], command = lambda m = numList[8] : resp
 lowerRight = Button(app, text = numList[9], command = lambda m = numList[9]: response(m))
 bottomMid = Button(app, text = numList[2], command = lambda m = numList[2] : response(m)) #i messed up
 
+numberPad = [upperLeft, upperMid, upperRight, midLeft, midMid, midRight, lowerLeft,lowerMid, lowerRight, bottomMid]
 
 bottomLeft = Button(app, text = '<', command = backspace)
 
